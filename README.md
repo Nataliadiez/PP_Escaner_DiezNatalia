@@ -32,25 +32,25 @@ Mismo barcode, o
 Mismo título, autor, año y superficie.
 
 ## Funcionalidades Principales
-### Documento y derivados:
-Propiedad NumNormalizado accesible solo desde clases derivadas.
-Estado inicial "Inicio".
-Método ToString() utilizando StringBuilder para mostrar todos los datos.
-Método AvanzarEstado() para cambiar al siguiente estado. Devuelve false si ya está en "Terminado".
-Sobrecarga del operador == para comparar documentos.
-En libros, ISBN muestra NumNormalizado.
-Los mapas calculan superficie como alto por ancho.
+### Documento y herencias:
+- Propiedad NumNormalizado accesible solo desde clases derivadas.
+- Estado inicial "Inicio".
+- Método ToString() utilizando StringBuilder para mostrar todos los datos.
+- Método AvanzarEstado() para cambiar al siguiente estado. Devuelve false si ya está en "Terminado".
+- Sobrecarga del operador == para comparar documentos.
+- En libros, ISBN muestra NumNormalizado.
+- Los mapas calculan superficie como alto por ancho.
 
-- Escáner:
-Constructor inicializa la lista de documentos y asigna la locación según el tipo de documento.
-Sobrecarga del operador == para verificar si un documento ya está en la lista.
-Sobrecarga del operador + para añadir documentos a la lista si no están ya presentes y están en estado "Inicio".
-Método CambiarEstadoDocumento() para cambiar el estado de un documento en la lista.
+### Escáner:
+- Constructor inicializa la lista de documentos y asigna la locación según el tipo de documento.
+- Sobrecarga del operador == para verificar si un documento ya está en la lista.
+- Sobrecarga del operador + para añadir documentos a la lista si no están ya presentes y están en estado "Inicio".
+- Método CambiarEstadoDocumento() para cambiar el estado de un documento en la lista.
 
-- Informes:
-Extensión: Total de páginas en libros o cm² en mapas según el estado.
-Cantidad: Número total de ítems únicos procesados según el estado.
-Resumen: Datos de cada ítem en una lista según el estado.
+### Informes:
+- Extensión: Total de páginas en libros o cm² en mapas según el estado.
+- Cantidad: Número total de ítems únicos procesados según el estado.
+- Resumen: Datos de cada ítem en una lista según el estado.
 
 # Criterios de Corrección
 - Motivos de Desaprobación Directa (nota = 2):
