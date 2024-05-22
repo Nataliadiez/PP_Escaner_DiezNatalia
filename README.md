@@ -1,48 +1,24 @@
-# Proyecto primera parte
-![Tinkercad](./img/ArduinoTinkercad.jpg)
+# PP_Escaner_DiezNatalia
 
-
-# Integrantes 
-- Oscar Alonso
-- Andrés Anguindegui
-- Natalia Diez
-
-
-# Proyecto: Contador de 0 a 99 con Display 7 Segmentos y Multiplexación.
-![Tinkercad](./img/Proyecto_1.png)
-
+# Proyecto: Sistema de Gestión de Escaneo de Documentos
 
 # Descripción
-El proyecto consiste en la creación de un contador numérico que permite contar desde 0 hasta 99 de forma ascendente, descendente y reiniciar el valor a 0. La información se muestra en dos displays de 7 segmentos y se controla a través de tres botones.
+Este proyecto es una solución para el primer parcial del curso de Programación II del primer cuatrimestre de 2024. El objetivo es crear un sistema para escanear y gestionar documentos en una biblioteca, abarcando dos tipos de documentos: libros y mapas. La solución consta de dos proyectos: una biblioteca de clases y una consola para pruebas.
 
-# Funciones
-## encenderSegmento
-La función encenderSegmento es una función utilizada para controlar la visualización en un display de 7 segmentos. 
-A través de esta función, se pueden encender o apagar segmentos específicos del display, permitiendo mostrar dígitos numéricos.
+# Estructura del Proyecto
+La solución se llama PP_Escaner_ApellidoNombre y está desarrollada en .NET 7.0. Contiene los siguientes proyectos:
+- Entidades: Biblioteca de clases que contiene la lógica principal del programa.
+- Test: Aplicación de consola utilizada para probar y verificar la funcionalidad del programa.
 
-Parámetros
-* "sa" posicion display A.
-* "sb" posicion display B.
-* "sc" posicion display C.
-* "sd" posicion display D.
-* "se" posicion display E.
-* "sf" posicion display F.
-* "sg" posicion display G.
+#Requisitos del Sistema
+##Estados del Proceso de Escaneo
+Los documentos pueden encontrarse en uno de los siguientes estados:
 
-La función toma estos parámetros y utiliza la instrucción digitalWrite para encender o apagar los pines del display de 7 segmentos correspondientes a los segmentos requeridos. Cada segmento está representado por una letra (A, B, C, D, E, F, G), y la función se encarga de establecer el estado de esos segmentos según los valores proporcionados.
-
-~~~ C
-void encenderSegmento(int sf, int sa, int sb, int sg, int se, int sd, int sc)
-{
-  digitalWrite(F, sf);
-  digitalWrite(A, sa);
-  digitalWrite(B, sb);
-  digitalWrite(G, sg);
-  digitalWrite(E, se);
-  digitalWrite(D, sd);
-  digitalWrite(C, sc);
-}
-~~~
+- Inicio: Valor por defecto.
+- Distribuido: Documento asignado al escáner correspondiente.
+- EnEscaner: Documento siendo escaneado.
+- EnRevision: Documento en proceso de revisión.
+- Terminado: Documento escaneado y aprobado.
 
 ## seleccionarNumero
 Esta función toma un número entero como parámetro y configura el estado de los segmentos del display para representar ese número.
@@ -51,87 +27,55 @@ Parámetros
 * "numero" este parámetro es un número entero que se desea mostrar en el display de 7 segmentos. 
 Puede ser un valor del 0 al 9 y se utiliza para seleccionar el número que se mostrará en el display.
 
-La función utiliza una estructura switch para determinar qué configuración de segmentos se debe aplicar para mostrar el número proporcionado.
+##Criterios de Identificación de Documentos
+- Libros:
+Mismo barcode, o
+Mismo ISBN, o
+Mismo título y autor.
 
-~~~ C
-void seleccionarNumero(int numero)
-{
-  switch(numero)
-  {
-    case 0:
-        encenderSegmento(1,1,1,0,1,1,1); 
-        break;
-    case 1: 
-        encenderSegmento(0,0,1,0,0,0,1); 
-        break;
-    case 2: 
-        encenderSegmento(0,1,1,1,1,1,0); 
-        break;
-    case 3: 
-        encenderSegmento(0,1,1,1,0,1,1); 
-        break;
-    case 4: 
-        encenderSegmento(1,0,1,1,0,0,1); 
-        break;
-    case 5: 
-        encenderSegmento(1,1,0,1,0,1,1); 
-        break;
-    case 6: 
-        encenderSegmento(1,1,0,1,1,1,1); 
-        break;
-    case 7: 
-      	encenderSegmento(0,1,1,0,0,0,1); 
-        break;
-    case 8:
-        encenderSegmento(1,1,1,1,1,1,1); 
-        break;
-    case 9: 
-        encenderSegmento(1,1,1,1,0,1,1); 
-      break;
-  }
-}
-~~~
+- Mapas:
+Mismo barcode, o
+Mismo título, autor, año y superficie.
 
-## encenderDisplay
-Esta función establece el encendido de los display, tanto del display de unidad como del de decena.
+## Funcionalidades Principales
+- Documento y derivados:
+Propiedad NumNormalizado accesible solo desde clases derivadas.
+Estado inicial "Inicio".
+Método ToString() utilizando StringBuilder para mostrar todos los datos.
+Método AvanzarEstado() para cambiar al siguiente estado. Devuelve false si ya está en "Terminado".
+Sobrecarga del operador == para comparar documentos.
+En libros, ISBN muestra NumNormalizado.
+Los mapas calculan superficie como alto por ancho.
 
-Parámetros
-* "estadoDecena" estado del display de decenas. Puede ser 0 o 1.
-* "estadoUnidades" estado del display de unidades. Puede ser 0 o 1.
+- Escáner:
+Constructor inicializa la lista de documentos y asigna la locación según el tipo de documento.
+Sobrecarga del operador == para verificar si un documento ya está en la lista.
+Sobrecarga del operador + para añadir documentos a la lista si no están ya presentes y están en estado "Inicio".
+Método CambiarEstadoDocumento() para cambiar el estado de un documento en la lista.
 
-Esta función muestra los números en los displays de 7 segmentos. Al controlar cuál de los dos displays está encendido en un momento dado, permite la visualización de números de dos dígitos.
+- Informes:
+Extensión: Total de páginas en libros o cm² en mapas según el estado.
+Cantidad: Número total de ítems únicos procesados según el estado.
+Resumen: Datos de cada ítem en una lista según el estado.
 
-~~~ C
-void encenderDisplay(int estadoDecena, int estadoUnidades)
-{
-  digitalWrite(displayDecena, estadoDecena);
-  digitalWrite(displayUnidad, estadoUnidades);
-}
-~~~
+#Criterios de Corrección
+- Motivos de Desaprobación Directa (nota = 2):
+La solución no compila.
+Warnings no permitidos.
+Excepciones no controladas en el código de testing.
+Último commit posterior a la fecha límite.
 
-## mostrarNumeroEnDisplay
-Esta función se encarga de mostrar un número en los display de 7 segmentos.
+- Requisitos para llegar al 4:
+La salida del test es similar en un 80% a la esperada.
+No hay errores graves en el código.
 
-Parámetros
-* "numero" número entero que se desea mostrar en el display de 7 segmentos. Debe ser un número entre 0 y 99.
+- Requisitos para llegar al 6:
+La salida del test es exactamente igual a la esperada.
 
-Divide el número en sus dígitos de decena y unidad, y luego activa los segmentos correspondientes en el display para representar estos dígitos en orden.
+- Requisitos para llegar al 8:
+La salida del test es exactamente igual a la esperada.
+El código sigue los principios de POO.
 
-## multiplexación
-En este proyecto se utiliza la técnica de la multiplexación, en la función mostrarNumeroEnDisplay, la cual combina los dos canales de información (DISPLAY_DECENA y DISPLAY_UNIDAD) utilizando un sólo medio de transmisión (a través de los mismos pines).
-Cuando DISPLAY_DECENA se establece en 0, el display de las decenas se activa y se muestra la cifra correspondiente. Luego, después de un pequeño retraso (delay(10)), se cambia el estado de DISPLAY_DECENA a 1, lo que apaga el display de las decenas.
-Después de mostrar la decena, el programa selecciona y muestra la unidad de manera similar, pero esta vez en el display de unidades.
-## :robot: Link al proyecto
-- [proyecto](https://www.tinkercad.com/things/j40rAgclUkK?sharecode=b2bka0rRlvn-AzD361vmAIcUtyY4SqD0foQZywS3EkY)
-
----
-### Fuentes
-- [Video de la cátedra](https://www.youtube.com/watch?v=_Ry7mtURGDE&list=PL7LaR6_A2-E11BQXtypHMgWrSR-XOCeyD&index=4&t=3445s&ab_channel=UTNFRA).
-
-- [Teoría multiplexación](https://teoriadelastelecomunicaciones.files.wordpress.com/2011/11/multiplexacion.pdf).
-
-- [Captura de imágenes](https://www.tinkercad.com/).
-
-- [Emojis](https://gist.github.com/rxaviers/7360908).
-
----
+- OPCIONAL: +2 puntos:
+Solo si se tiene un 6 de partida.
+Incluir una excepción controlada y defenderla oralmente.
