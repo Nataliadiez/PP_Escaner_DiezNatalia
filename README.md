@@ -32,7 +32,7 @@ Mismo barcode, o
 Mismo título, autor, año y superficie.
 
 ## Funcionalidades Principales
-- Documento y derivados:
+### Documento y derivados:
 Propiedad NumNormalizado accesible solo desde clases derivadas.
 Estado inicial "Inicio".
 Método ToString() utilizando StringBuilder para mostrar todos los datos.
