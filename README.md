@@ -74,7 +74,7 @@ El código sigue los principios de POO.
 Solo si se tiene un 6 de partida.
 Incluir una excepción controlada y defenderla oralmente.
 
-#Ejecución
+# Ejecución
 Para ejecutar el proyecto, clona el repositorio y compila ambos proyectos (Entidades y Test). Usa la aplicación de consola para realizar pruebas y verificar que la funcionalidad cumple con los requisitos.
 
 ~~~ C#
