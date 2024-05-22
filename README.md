@@ -1,6 +1,6 @@
 # PP_Escaner_DiezNatalia
 
-# Proyecto: Sistema de Gestión de Escaneo de Documentos
+# Primer parcial de programación II: Sistema de Gestión de Escaneo de Documentos
 
 # Descripción
 Este proyecto es una solución para el primer parcial del curso de Programación II del primer cuatrimestre de 2024. El objetivo es crear un sistema para escanear y gestionar documentos en una biblioteca, abarcando dos tipos de documentos: libros y mapas. La solución consta de dos proyectos: una biblioteca de clases y una consola para pruebas.
@@ -10,8 +10,8 @@ La solución se llama PP_Escaner_ApellidoNombre y está desarrollada en .NET 7.0
 - Entidades: Biblioteca de clases que contiene la lógica principal del programa.
 - Test: Aplicación de consola utilizada para probar y verificar la funcionalidad del programa.
 
-#Requisitos del Sistema
-##Estados del Proceso de Escaneo
+# Requisitos del Sistema
+## Estados del Proceso de Escaneo
 Los documentos pueden encontrarse en uno de los siguientes estados:
 
 - Inicio: Valor por defecto.
@@ -20,14 +20,8 @@ Los documentos pueden encontrarse en uno de los siguientes estados:
 - EnRevision: Documento en proceso de revisión.
 - Terminado: Documento escaneado y aprobado.
 
-## seleccionarNumero
-Esta función toma un número entero como parámetro y configura el estado de los segmentos del display para representar ese número.
 
-Parámetros
-* "numero" este parámetro es un número entero que se desea mostrar en el display de 7 segmentos. 
-Puede ser un valor del 0 al 9 y se utiliza para seleccionar el número que se mostrará en el display.
-
-##Criterios de Identificación de Documentos
+## Criterios de Identificación de Documentos
 - Libros:
 Mismo barcode, o
 Mismo ISBN, o
@@ -58,7 +52,7 @@ Extensión: Total de páginas en libros o cm² en mapas según el estado.
 Cantidad: Número total de ítems únicos procesados según el estado.
 Resumen: Datos de cada ítem en una lista según el estado.
 
-#Criterios de Corrección
+# Criterios de Corrección
 - Motivos de Desaprobación Directa (nota = 2):
 La solución no compila.
 Warnings no permitidos.
