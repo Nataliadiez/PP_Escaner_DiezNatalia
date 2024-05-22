@@ -6,7 +6,7 @@
 Este proyecto es una solución para el primer parcial del curso de Programación II del primer cuatrimestre de 2024. El objetivo es crear un sistema para escanear y gestionar documentos en una biblioteca, abarcando dos tipos de documentos: libros y mapas. La solución consta de dos proyectos: una biblioteca de clases y una consola para pruebas.
 
 # Estructura del Proyecto
-La solución se llama PP_Escaner_ApellidoNombre y está desarrollada en .NET 7.0. Contiene los siguientes proyectos:
+La solución se llama PP_Escaner_DiezNatalia y está desarrollada en .NET 7.0. Contiene los siguientes proyectos:
 - Entidades: Biblioteca de clases que contiene la lógica principal del programa.
 - Test: Aplicación de consola utilizada para probar y verificar la funcionalidad del programa.
 
@@ -73,3 +73,15 @@ El código sigue los principios de POO.
 - OPCIONAL: +2 puntos:
 Solo si se tiene un 6 de partida.
 Incluir una excepción controlada y defenderla oralmente.
+
+#Ejecución
+Para ejecutar el proyecto, clona el repositorio y compila ambos proyectos (Entidades y Test). Usa la aplicación de consola para realizar pruebas y verificar que la funcionalidad cumple con los requisitos.
+
+~~~ C#
+git clone https://github.com/Nataliadiez/PP_Escaner_DiezNatalia.git
+cd PP_Escaner_DiezNatalia
+dotnet build
+dotnet run --project Test
+~~~
+
+
